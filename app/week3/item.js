@@ -3,7 +3,7 @@ const Item = ({ name, quantity, category }) => {
       <li className="list-item">
         <span className="text-xl font-bold">{name}</span>
         <span className="text-lg">Buy: {quantity}</span>
-        <span className="text-lg">in: {category}</span>
+        <span className="text-lg"> in: {category}</span>
       </li>
     );
   };
