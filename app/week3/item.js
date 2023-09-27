@@ -1,9 +1,9 @@
 const Item = ({ name, quantity, category }) => {
     return (
-      <div className="bg-white p-4 m-2 rounded border">
+      <div className="bg-yellow-300 p-4 m-2">
         <li className="list-item">
-          <span className="text-xl font-bold">{name}</span>
-          <span className="text-lg"> Buy {quantity} in {category}</span>
+          <div className="text-xl font-bold">{name}</div>
+          <div className="text-lg">Buy {quantity} in {category}</div>
         </li>
       </div>
     );
