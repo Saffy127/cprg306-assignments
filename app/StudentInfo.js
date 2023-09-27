@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const StudentInfo = () => {
   return (
-    <div className="center-content">
+    <div>
       <h2>Isaac Saffran</h2>
       <p>Course Section: CPRG 306 F</p>
       <Link href="https://github.com/Saffy127">

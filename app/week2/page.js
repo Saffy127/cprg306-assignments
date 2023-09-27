@@ -2,7 +2,7 @@ import StudentInfo from '../StudentInfo';
 
 const Week2Page = () => {
   return (
-    <div className="center-content">
+    <div>
       <h1>My Shopping List</h1>
       <StudentInfo />
     </div>
