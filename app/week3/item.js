@@ -1,7 +1,9 @@
 const Item = ({ name, quantity, category }) => {
     return (
-      <li className="list-item">
-        {name}, Quantity: {quantity}, Category: {category}
+      <li className="flex justify-between border-b py-2">
+        <span>{name}</span>
+        <span>Quantity: {quantity}</span>
+        <span>Category: {category}</span>
       </li>
     );
   };
