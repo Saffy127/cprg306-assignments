@@ -65,17 +65,16 @@ const ItemList = () => {
   ];
 
   return (
-    <ul className="my-3">
-      {items.map((item, index) => (
-        <Item
-          key={index}
-          name={item.name}
-          quantity={item.quantity}
-          category={item.category}
-        />
-      ))}
-    </ul>
-  );
+    <ul className="text-center text-white space-y-2">
+    {items.map((item, index) => (
+      <Item
+        key={index}
+        name={item.name}
+        quantity={item.quantity}
+        category={item.category}
+      />
+    ))}
+  </ul>
+);
 };
-
 export default ItemList;
