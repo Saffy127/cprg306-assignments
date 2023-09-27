@@ -1,7 +1,22 @@
+/* Existing or new styles */
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
 .center-content {
   text-align: center;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, p, a {
+  margin: 0.2em;
+  padding: 0;
 }
