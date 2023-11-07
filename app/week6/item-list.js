@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import Item from './item';
-import './app/globals.css'; 
 const ItemList = ({ items }) => { // 1. Accept the items prop
   const [sortBy, setSortBy] = useState('name');
   
