@@ -1,4 +1,4 @@
-// page.js
+"use client";
 import { useContext } from 'react';
 import { authContext } from '../_utils/auth-context';
 import { signInWithPopup, GithubAuthProvider } from "firebase/auth";
