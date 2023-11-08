@@ -1,20 +1,13 @@
 "use client";
-import { useContext } from 'react';
-import { authContext } from '../_utils/auth-context';
-import { signInWithPopup, GithubAuthProvider } from "firebase/auth";
+import { useUserAuth } from '../_utils/auth-context';
 
 export default function LandingPage() {
-  const { user, setUser } = useContext(authContext);
-  const provider = new GithubAuthProvider();
+  const { user, gitHubSignIn } = useUserAuth();
 
   const signInWithGithub = () => {
-    signInWithPopup(auth, provider)
+    gitHubSignIn()
       .then((result) => {
-        // This gives you a GitHub Access Token.
-        const token = result.credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        setUser(user);
+        // The result already contains the user, no need to set it again.
       }).catch((error) => {
         // Handle Errors here.
         console.error(error);
@@ -24,7 +17,7 @@ export default function LandingPage() {
   return (
     <div>
       {!user ? (
-        <button onClick={signInWithGithub}>Sign in with GitHub Pwease</button>
+        <button onClick={signInWithGithub}>Sign in with GitHub Please</button>
       ) : (
         <div>Welcome, {user.displayName}!</div>
       )}
