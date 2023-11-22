@@ -1,24 +1,35 @@
-import { db } from "../_utils/firebase";
-import { collection, getDocs, addDoc, query } from "firebase/firestore";
+"use client";
+import React, { useState, useEffect } from 'react';
+import ItemList from './item-list';
+import NewItem from './new-item';
+import { getItems, addItem } from './_services/shopping-list-service'; 
 
-async function getItems(userId) {
-    const items = [];
-    const itemsCollectionRef = collection(db, 'users', userId, 'items');
-    const querySnapshot = await getDocs(itemsCollectionRef);
+function Page() {
+    const [items, setItems] = useState([]);
 
-    querySnapshot.forEach(doc => {
-        items.push({ id: doc.id, ...doc.data() });
-    });
+    const userUid = 'some-user-uid'; 
 
-    return items;
+    async function loadItems() {
+        const fetchedItems = await getItems(userUid);
+        setItems(fetchedItems);
+    }
+
+    useEffect(() => {
+        loadItems();
+    }, []);
+
+    async function handleAddItem(newItem) {
+        const newItemId = await addItem(userUid, newItem);
+        setItems(prevItems => [...prevItems, { ...newItem, id: newItemId }]);
+    }
+
+    return (
+        <main>
+            <h1>Shopping List</h1>
+            <NewItem onAddItem={handleAddItem} />
+            <ItemList items={items} />
+        </main>
+    );
 }
 
-// The 'addItem' function adds a new item to the user's 'items' subcollection in Firestore and returns the ID of the new document:
-
-async function addItem(userId, item) {
-    const itemsCollectionRef = collection(db, 'users', userId, 'items');
-    const docRef = await addDoc(itemsCollectionRef, item);
-
-    return docRef.id;
-}
-
+export default Page;
