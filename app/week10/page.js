@@ -1,25 +1,30 @@
 "use client";
-import { useUserAuth } from './_utils/auth-context';
 
-export default function LandingPage() {
-  const { user, gitHubSignIn } = useUserAuth();
+import { useUserAuth } from "./_utils/auth-context";
 
-  const signInWithGithub = () => {
-    gitHubSignIn()
-      .then((result) => {
-      }).catch((error) => {
-        console.error(error);
-      });
-  };
+export default function Page() {
 
-  return (
-    <div>
-      {!user ? (
-        <button onClick={signInWithGithub}>Sign in with GitHub Please</button>
-      ) : (
-        <div>Welcome, {user.displayName}!</div>
-      )}
-    </div>
-  );
+    const {user, gitHubSignIn, firebaseSignOut} = useUserAuth();
+
+    async function handleSignIn() {
+        await gitHubSignIn();
+    }
+    
+    async function handleSignOut() {
+        await firebaseSignOut();
+    }
+
+    return (
+        <div>
+            <div>
+                <h1>Welcome to Week 8!</h1>
+                {!user && <h1>Sign in to View Week 8</h1>}
+                {!user && <button onClick = {handleSignIn}>Sign In</button>}
+            </div>
+            <div>
+                {user && <h1>Sign Out</h1>}
+                {user && <button onClick = {handleSignOut}>Sign Out</button>}
+            </div>
+        </div>
+    )
 }
-
