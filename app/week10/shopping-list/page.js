@@ -1,4 +1,5 @@
 "use client";
+import { useUserAuth } from '../_utils/auth-context'; // Updated import path
 
 export default function LandingPage() {
   const { user, gitHubSignIn } = useUserAuth();
@@ -21,3 +22,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
