@@ -1,19 +1,24 @@
 "use client";
-import React, { useState } from 'react';
+import { useUserAuth } from './_utils/auth-context';
 
-function Page() {
-    const [items, setItems] = useState(itemsData);
+export default function LandingPage() {
+  const { user, gitHubSignIn } = useUserAuth();
 
-    function handleAddItem(newItem) {
-        setItems(prevItems => [...prevItems, newItem]);
-    }
+  const signInWithGithub = () => {
+    gitHubSignIn()
+      .then((result) => {
+      }).catch((error) => {
+        console.error(error);
+      });
+  };
 
-    return (
-        <main>
-            <h1>Shopping List</h1>
-            <NewItem onAddItem={handleAddItem} />
-            <ItemList items={items} />
-        </main>
-    );
+  return (
+    <div>
+      {!user ? (
+        <button onClick={signInWithGithub}>Sign in with GitHub Please</button>
+      ) : (
+        <div>Welcome, {user.displayName}!</div>
+      )}
+    </div>
+  );
 }
-
