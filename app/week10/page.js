@@ -1,30 +1,42 @@
-"use client";
-
+'use client';
+import React from 'react';
 import { useUserAuth } from "./_utils/auth-context";
+import Link from 'next/link';
 
-export default function Page() {
+function HomePage() {
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
-    const {user, gitHubSignIn, firebaseSignOut} = useUserAuth();
-
-    async function handleSignIn() {
-        await gitHubSignIn();
+  const handleLogin = async () => {
+    try {
+      await gitHubSignIn();
+    } catch (error) {
+      console.error(error);
     }
-    
-    async function handleSignOut() {
-        await firebaseSignOut();
-    }
+  };
 
-    return (
+  const handleLogout = async () => {
+    try {
+      await firebaseSignOut();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Welcome to the Shopping List App</h1>
+      {user ? (
         <div>
-            <div>
-                <h1>Welcome to Week 8!</h1>
-                {!user && <h1>Sign in to View Week 8</h1>}
-                {!user && <button onClick = {handleSignIn}>Sign In</button>}
-            </div>
-            <div>
-                {user && <h1>Sign Out</h1>}
-                {user && <button onClick = {handleSignOut}>Sign Out</button>}
-            </div>
+          <p>Welcome, {user.displayName} ({user.email})</p>
+          <button onClick={handleLogout}>Logout</button>
+          <br></br>
+          <Link href="/week10/shopping-list">Go to Shopping List</Link>
         </div>
-    )
+      ) : (
+        <button onClick={handleLogin}>Login with GitHub</button>
+      )}
+    </div>
+  );
 }
+
+export default HomePage;
